@@ -1,6 +1,17 @@
 <?php
+declare(strict_types=1);
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
+/*
+use App\Http\Controllers\ShoppingListController;
+use App\Http\Controllers\CompletedShoppingListController;
+
+use App\Http\Controllers\Admin\AuthController as AdminAuthController;
+use App\Http\Controllers\Admin\HomeController as AdminHomeController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
+*/
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +24,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+//TopPage
+Route::get('/', [AuthController::class, 'index']);
+
+//会員登録
+Route::prefix('/user')->group(function () {
+    Route::get('/register', [UserController::class, 'index'])->name('front.user.register');
+    //Route::post('/register', [UserController::class, 'register'])->name('front.user.register.post');
 });
