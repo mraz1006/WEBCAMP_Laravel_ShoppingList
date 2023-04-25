@@ -1,17 +1,24 @@
-<!DOCTYPE html>
-<html lang="ja">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>買い物リスト</title>
-    </head>
-    <body>
+@extends('layout')
+
+{{-- メインコンテンツ --}}
+@section('contents')
         <h1>ログイン</h1>
+        @if (session('front.user_register_success') == true)
+                会員登録しました！！<br>
+        @endif
+
+        @if ($errors->any())
+            <div>
+            @foreach ($errors->all() as $error)
+                {{ $error }}<br>
+            @endforeach
+            </div>
+        @endif
         <form action="/login" method="post">
-            email:<input name="email"><br>
+            @csrf
+            email:<input name="email" value="{{ old('email') }}"><br>
             パスワード：<input  name="password" type="password"><br>
             <button>ログインする</button>
         </form>
-        <a href="/user/register">会員登録</a><br>
-    </body>
-</html>
+         <a href="user/register">会員登録</a><br>
+@endsection
