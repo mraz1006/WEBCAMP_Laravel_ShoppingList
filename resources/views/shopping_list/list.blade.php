@@ -8,8 +8,18 @@
 <h1>「買うもの」の登録</h1>
 <form action="/shopping_list/register" method="post">
         @if (session('front.shoppinglists_register_success') == true)
-                買い物リストに追加しました！！<br>
+                「買うもの」を登録しました！！<br>
         @endif
+        @if (session('front.shopping_item_delete_success') == true)
+                「買うもの」を削除しました！！<br>
+        @endif
+        @if (session('front.shopping_item_completed_success') == true)
+                「買うもの」を完了にしました！！<br>
+        @endif
+        @if (session('front.shopping_item_completed_failure') == true)
+                「買うもの」の完了に失敗しました....<br>
+        @endif
+
       @if ($errors->any())
             <div>
             @foreach ($errors->all() as $error)
@@ -22,5 +32,52 @@
                 <button>「買うもの」を登録する</button>
             </form>
 
-        <h1>買い物リスト</h1>
+        <h1>「買うもの」一覧</h1>
+        <a href="/shopping_list/completed_list">購入済み「買うもの一覧」</a><br>
+        <table border="1">
+        <tr>
+            <th>登録日
+            <th>「買うもの」名
+        @foreach ($list as $shoppingitem)
+        <tr>
+            <td>{{ $shoppingitem->created_at->format('Y/m/d')}}
+            <td>{{ $shoppingitem->name }}  
+            <td>
+                <form action="{{ route('complete', ['shopping_list_id' => $shoppingitem->id]) }}" method="post"> 
+                    @csrf 
+                    <button onclick='return confirm("この買うものを「完了」にします。よろしいですか？");' >完了</button>
+                </form>
+            <td>
+                <form action="{{ route('delete', ['shopping_list_id' => $shoppingitem->id]) }}" method="post">
+                @csrf
+                @method("DELETE")
+                <button onclick='return confirm("この買うものを削除します(削除したら戻せません)。よろしいですか？");'>削除</button>
+                </form> 
+            
+        @endforeach
+        </table>
+        現在 {{ $list->currentPage() }} ページ目<br>
+        @if ($list->onFirstPage() === false)
+            <a href="/shopping_list/list">最初のページ</a>
+        @else
+            最初のページ
+        @endif
+        /
+        @if ($list->previousPageUrl() !== null)
+            <a href="{{ $list->previousPageUrl() }}">前に戻る</a>
+        @else
+            前に戻る
+        @endif
+        /
+        @if ($list->nextPageUrl() !== null)
+            <a href="{{ $list->nextPageUrl() }}">次に進む</a>
+        @else
+            次に進む
+        @endif
+        <br>
+        <hr>
+        <menu label="リンク">
+        <a href="/logout">ログアウト</a><br>
+        </menu>
+        
 @endsection

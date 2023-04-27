@@ -41,4 +41,13 @@ class AuthController extends Controller
         $request->session()->regenerate();
         return redirect()->intended('/shopping_list/list');
     }
+    /**
+     * ログアウト処理
+     * 
+     */
+    public function logout()
+    {
+        Auth::logout();
+        return redirect('/');
+    }
 }
