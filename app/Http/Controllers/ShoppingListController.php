@@ -89,7 +89,7 @@ class ShoppingListController extends Controller
      */
     public function delete(Request $request, $shopping_list_id)
     {
-        // dのレコードを取得する
+        // idのレコードを取得する
         $item = $this->getShoppingListsModel($shopping_list_id);
         //var_dump($item); exit;
         

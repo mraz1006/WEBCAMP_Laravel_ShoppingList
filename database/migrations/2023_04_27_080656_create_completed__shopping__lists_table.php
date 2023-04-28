@@ -15,7 +15,7 @@ class CreateCompletedShoppingListsTable extends Migration
     {
         Schema::create('completed_shoppinglists', function (Blueprint $table) {
             $table->unsignedInteger('id');
-            $table->string('name', 128)->comment('買い物名');
+            $table->string('name', 256)->comment('買い物名');
             $table->unsignedBigInteger('user_id')->comment('このタスクの所有者');
             $table->foreign('user_id')->references('id')->on('users'); // 外部キー制約
             //$table->timestamps();

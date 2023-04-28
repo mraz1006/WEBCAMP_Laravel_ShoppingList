@@ -47,10 +47,11 @@
                     @csrf 
                     <button onclick='return confirm("この買うものを「完了」にします。よろしいですか？");' >完了</button>
                 </form>
-            <td>
+                <td><?php echo "&emsp;"; //半角スペース ?>
+                <td>
                 <form action="{{ route('delete', ['shopping_list_id' => $shoppingitem->id]) }}" method="post">
-                @csrf
-                @method("DELETE")
+                    @csrf
+                    @method("DELETE")
                 <button onclick='return confirm("この買うものを削除します(削除したら戻せません)。よろしいですか？");'>削除</button>
                 </form> 
             
