@@ -157,6 +157,7 @@ class ShoppingListController extends Controller
 
         $list = CompletedShoppingListsModel::where('user_id', Auth::id())
         ->orderBy('name')
+        ->orderBy('created_at')
         ->paginate($per_page);
         //->get();
 //$sql = ShoppingListsModel::toSql();

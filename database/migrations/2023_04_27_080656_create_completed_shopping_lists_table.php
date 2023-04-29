@@ -13,9 +13,9 @@ class CreateCompletedShoppingListsTable extends Migration
      */
     public function up()
     {
-        Schema::create('completed_shoppinglists', function (Blueprint $table) {
+        Schema::create('completed_shopping_lists', function (Blueprint $table) {
             $table->unsignedInteger('id');
-            $table->string('name', 256)->comment('買い物名');
+            $table->string('name', 255)->comment('買い物名');
             $table->unsignedBigInteger('user_id')->comment('このタスクの所有者');
             $table->foreign('user_id')->references('id')->on('users'); // 外部キー制約
             //$table->timestamps();
@@ -33,6 +33,6 @@ class CreateCompletedShoppingListsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('completed__shopping__lists');
+        Schema::dropIfExists('completed_shopping_lists');
     }
 }
