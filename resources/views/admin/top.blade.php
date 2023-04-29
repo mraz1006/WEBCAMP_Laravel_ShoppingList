@@ -12,7 +12,7 @@
             </div>
         @endif
 
-        <a href="/admin/">管理画面Top</a><br>
+        <a href="/admin/top">管理画面Top</a><br>
         <a href="/admin/user/list">ユーザ一覧</a><br>
         <a href="/admin/logout">ログアウト</a><br>
 
